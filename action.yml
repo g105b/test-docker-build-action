@@ -1,0 +1,18 @@
+name: Greg's Test Docker Build Action
+description: Github Actions and Docker test project.
+
+inputs:
+  name:
+    description: Name to greet, "Hello, World!" style
+    default: World
+    required false
+
+runs:
+  using: "composite"
+  steps:
+    - env:
+        ACTION_NAME: ${{ inputs.name }}
+      id: runner
+      run: ${{ github.action_path }}/docker-build.bash \
+        && ${{ github.action_path }}/greet.bash
+      shell: bash
