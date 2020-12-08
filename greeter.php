@@ -1,4 +1,3 @@
 <?php
-$name = file_get_contents(__DIR__ . "/name.txt");
-$name = trim($name);
+$name = getenv("GREETER_NAME");
 echo "Hello, $name!", PHP_EOL;

@@ -3,13 +3,10 @@ set -e
 docker pull -q "php:$ACTION_PHP_VERSION"
 dockerfile="FROM php:$ACTION_PHP_VERSION"
 
-# Create the greeting as a file, so it can be added to the custom Docker image.
-touch name.txt
-echo "$ACTION_NAME" > name.txt
 dockerfile="${dockerfile}
-ADD name.txt /tmp/name.txt
-ADD greeter.php /tmp/greeter.php
-CMD php /tmp/greeter.php
+ENV GREETER_NAME=\"${ACTION_NAME}\"
+ADD greeter.php /app/greeter.php
+CMD php /app/greeter.php
 "
 
 # Tag the image with the name we've added, so it can be cached per-name.
