@@ -14,7 +14,7 @@ CMD php /app/greeter.php
 
 ACTION_NAME_NO_SPACES="${ACTION_NAME// /_}"
 # Tag the image with the name we've added, so it can be cached per-name.
-docker_tag="ghcr.io/g105b/test-docker-build-action:${ACTION_PHP_VERSION}-${ACTION_NAME_NO_SPACES}"
+docker_tag="docker.pkg.github.com/g105b/test-docker-build-action:${ACTION_PHP_VERSION}-${ACTION_NAME_NO_SPACES}"
 docker pull "$docker_tag" || echo "Remote tag does not exist yet"
 
 # Build the custom image and attempt to push it.
