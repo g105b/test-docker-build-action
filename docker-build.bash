@@ -14,5 +14,6 @@ docker_tag="ghcr.io/g105b/test-docker-build-action:${ACTION_NAME}"
 docker pull "$docker_tag" || echo "Remote tag does not exist yet"
 
 # Build the custom image and attempt to push it.
-echo "$dockerfile" | docker build --tag "$docker_tag" -
+echo "$dockerfile" > Dockerfile
+docker build --tag "$docker_tag" .
 docker push "$docker_tag"
