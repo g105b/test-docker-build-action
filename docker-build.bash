@@ -4,7 +4,6 @@ docker pull -q "php:$ACTION_PHP_VERSION"
 dockerfile="FROM php:$ACTION_PHP_VERSION"
 
 GITHUB_USER=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user | jq -r .login)
-echo "DEBUG: Github username: $GITHUB_USER"
 echo "${GITHUB_TOKEN}" | docker login docker.pkg.github.com -u "${GITHUB_USER}" --password-stdin
 
 dockerfile="${dockerfile}
@@ -19,6 +18,8 @@ docker_tag="ghcr.io/g105b/test-docker-build-action:${ACTION_PHP_VERSION}-${ACTIO
 docker pull "$docker_tag" || echo "Remote tag does not exist yet"
 
 # Build the custom image and attempt to push it.
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "${DIR}"
 echo "$dockerfile" > Dockerfile
 docker build --tag "$docker_tag" .
 docker push "$docker_tag"
