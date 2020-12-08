@@ -3,6 +3,8 @@ Test Docker Build Action
 
 This is a test repository that I'm using to document the process of building a Github Action that builds a customised Docker image, according to the action's input.
 
+The example repository that uses this action is located here: https://github.com/g105b/example-test-docker-build-action.
+
 This technique is used in [php-actions](https://github.com/php-actions) so that each action can specify its own version of PHP, which extensions are installed, and the version of the component being run inside the action (Composer, PHPUnit, etc.). It is greatly simplified in this repository to help me and others when building similar actions.
 
 Step by step
