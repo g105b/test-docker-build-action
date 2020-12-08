@@ -3,7 +3,7 @@ set -e
 docker pull -q "php:$ACTION_PHP_VERSION"
 dockerfile="FROM php:$ACTION_PHP_VERSION"
 
-echo "${GITHUB_TOKEN}" | docker login docker.pkg.github.com -u "${GITHUB_USER}" --password-stdin
+echo "${GITHUB_TOKEN}" | docker login docker.pkg.github.com -u "${GITHUB_ACTOR}" --password-stdin
 
 dockerfile="${dockerfile}
 ENV GREETER_NAME=\"${ACTION_NAME}\"
@@ -14,7 +14,7 @@ CMD php /app/greeter.php
 ACTION_NAME_NO_SPACES="${ACTION_NAME// /_}"
 ACTION_NAME_NO_SPACES="${ACTION_NAME_NO_SPACES,,}"
 # Tag the image with the name we've added, so it can be cached per-name.
-docker_tag="docker.pkg.github.com/$GITHUB_REPO/example-docker-image:php${ACTION_PHP_VERSION}-${ACTION_NAME_NO_SPACES}"
+docker_tag="docker.pkg.github.com/$GITHUB_REPOSITORY/example-docker-image:php${ACTION_PHP_VERSION}-${ACTION_NAME_NO_SPACES}"
 docker pull "$docker_tag" || echo "Remote tag does not exist yet"
 
 # Build the custom image and attempt to push it.
