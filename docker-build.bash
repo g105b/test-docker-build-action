@@ -3,6 +3,10 @@ set -e
 docker pull -q "php:$ACTION_PHP_VERSION"
 dockerfile="FROM php:$ACTION_PHP_VERSION"
 
+echo "DEBUG: GITHUB_ACTOR = ${GITHUB_ACTOR}"
+echo "DEBUG: GITHUB_REPOSITORY = ${GITHUB_REPOSITORY}"
+echo "DEBUG: GITHUB_SHA = ${GITHUB_SHA}"
+
 echo "${GITHUB_TOKEN}" | docker login docker.pkg.github.com -u "${GITHUB_ACTOR}" --password-stdin
 
 dockerfile="${dockerfile}
