@@ -7,7 +7,10 @@ dockerfile="FROM php:$ACTION_PHP_VERSION"
 touch name.txt
 echo "$ACTION_NAME" > name.txt
 dockerfile="${dockerfile}
-ADD name.txt /tmp/name.txt"
+ADD name.txt /tmp/name.txt
+ADD greeter.php /tmp/greeter.php
+CMD php /tmp/greeter.php
+"
 
 # Tag the image with the name we've added, so it can be cached per-name.
 docker_tag="ghcr.io/g105b/test-docker-build-action:${ACTION_NAME}"
