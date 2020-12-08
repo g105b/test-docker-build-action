@@ -18,6 +18,7 @@ runs:
     - env:
         ACTION_PHP_VERSION: ${{ inputs.php_version }}
         ACTION_NAME: ${{ inputs.name }}
+        GITHUB_TOKEN: ${{ github.token }}
 
       id: runner
       run: ${{ github.action_path }}/docker-build.bash \
