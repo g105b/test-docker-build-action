@@ -23,3 +23,7 @@ runs:
       run: ${{ github.action_path }}/docker-build.bash \
         && ${{ github.action_path }}/greet.bash
       shell: bash
+
+branding:
+  icon: anchor
+  color: blue
