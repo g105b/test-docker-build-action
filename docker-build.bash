@@ -5,6 +5,7 @@ dockerfile="FROM php:$ACTION_PHP_VERSION"
 
 GITHUB_USER=$(curl -sSL -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user | jq -r .login)
 echo "DEBUG: Github username: $GITHUB_USER"
+echo "${GITHUB_TOKEN}" | docker login docker.pkg.github.com -u "${GITHUB_USER}" --password-stdin
 
 dockerfile="${dockerfile}
 ENV GREETER_NAME=\"${ACTION_NAME}\"
