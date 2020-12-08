@@ -1,4 +1,6 @@
 #!/bin/bash
 set -e
-docker_tag="ghcr.io/g105b/test-docker-build-action:${ACTION_NAME}"
+ACTION_NAME_NO_SPACES="${ACTION_NAME// /_}"
+ACTION_NAME_NO_SPACES="${ACTION_NAME_NO_SPACES,,}"
+docker_tag="docker.pkg.github.com/$GITHUB_REPO/example-docker-image:php${ACTION_PHP_VERSION}-${ACTION_NAME_NO_SPACES}"
 docker run --rm "$docker_tag"
